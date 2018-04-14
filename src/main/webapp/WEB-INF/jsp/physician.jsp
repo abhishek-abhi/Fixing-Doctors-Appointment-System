@@ -103,8 +103,8 @@ body{
     <h1>Fixing Doctors Appointment System</h1>
     <p class="lead"></p>
     </div>
-  <h2>Hover Rows</h2>
-  <p>The .table-hover class enables a hover state on table rows:</p>            
+  <h2>List Of Physicians</h2>
+  <p>Click on the BOOK button to confirm your appointment</p>            
 
    <sql:setDataSource
         var="myDS"

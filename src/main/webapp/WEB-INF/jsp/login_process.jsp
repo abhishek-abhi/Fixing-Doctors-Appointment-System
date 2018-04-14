@@ -108,11 +108,11 @@ body{
         SELECT * FROM Persons;
     </sql:query>
         <%
-        out.println(request.getParameter("name"));
+        //out.println(request.getParameter("name"));
         %>
         <br>
         <%
-        out.println(request.getParameter("timing")); 
+        //out.println(request.getParameter("timing")); 
         %>
 </div>
 <%! String userdbName;
