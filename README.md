@@ -10,6 +10,7 @@ This is the complete Web-Application.
    
 <hr><strong>Technologies and Tools used :</strong>
 
+
         1. Advanced Java
         2. JAX-RS
         3. JPA
