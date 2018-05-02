@@ -5,6 +5,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <html>
 <head>
+<!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/creative.min.css" rel="stylesheet">
+
+
 <meta charset="utf-8">
 <meta name="Viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta http-equiv="X-ua-compatible" content="ie=edge">
@@ -15,7 +30,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <style type="text/css">
 body{
-	padding-top: 50px;
+ padding-top: 150px;
 }
 
 .starter-template{
@@ -82,8 +97,7 @@ body{
         <div id="navbar" class="collapse navbar-collapse ">
           <ul class="nav navbar-nav" id="bright">
             <li><a href="/">Home</a></li>
-            <li class="active"><a href="/physician">Physicians</a></li>
-            <li><a href="/surgeon">Surgeon</a></li>
+            <li class="active"><a href="/doctors">Doctors</a></li>
           </ul>
           
           <ul class="nav navbar-nav navbar-right">
@@ -93,7 +107,26 @@ body{
         </div><!--/.nav-collapse -->
       </div>
     </div>
-    <div class="container">
+
+
+
+
+    <section class="bg-primary" id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading text-white"><<<...FIXING DOCTORS APPOINTMENT SYSTEM...>>></h2>
+            <hr class="light my-4">
+            <p class="text-faded mb-4">You are done.</p>
+            <a class="btn btn-light btn-xl js-scroll-trigger" href="#messagings">Click Here</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="messagings">
+      <div class="container">
+            <div class="container">
     <div class="starter-template">
     <h1>Fixing Doctors Appointment System</h1>
     <p class="lead">Booking is being done....</p>
@@ -127,12 +160,11 @@ body{
 	Session sessionn = Session.getDefaultInstance(props,
 		new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("abhishekumarmandal@gmail.com","FDFD765634532FDSDF@#$$");
+				return new PasswordAuthentication("abhishekumarmandal@gmail.com","Cguea%&532@");
 			}
 		});
 	String s1=session.getAttribute("email").toString();
-	
-
+	session.setAttribute("messaging", "Welcome!!!...."); 
 	try {
 
 		Message message = new MimeMessage(sessionn);
@@ -140,7 +172,7 @@ body{
 		message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(s1));
 		message.setSubject("Appointment Details");
-		message.setText("Congratulation! Your appointment with Dr."+ request.getParameter("name")+" is fixed," +
+		message.setText("Congratulation! Your appointment with Dr."+ request.getParameter("name")+" is fixed at " +request.getParameter("timing")+
 				"\n\n See you soon, Thanking You!");
 		session.setAttribute("dname",request.getParameter("name"));
 		session.setAttribute("tname",request.getParameter("timing"));
@@ -151,7 +183,8 @@ body{
 	} catch (MessagingException e) {
 		throw new RuntimeException(e);
 	}
-	/*
+	
+ 
 	String driverName = "com.mysql.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/Project_db";
 	String user = "root";
@@ -159,14 +192,41 @@ body{
 	
 	Connection con = null;
 	PreparedStatement ps = null;
+	PreparedStatement ps1 = null;
 	try
 	{
 	Class.forName(driverName);
 	con = DriverManager.getConnection(url, user, dbpsw);
-	String sql="update Doctors set counter=2 where name=? and timing=?";
-	ps = con.prepareStatement(sql);
-	String name = session.getAttribute("dname").toString();
+
 	String timing = session.getAttribute("tname").toString();
+	String sql1 = "select counter from Doctors where timing='"+timing+"'";
+	//ps1 = con.prepareStatement(sql1);
+	String name = session.getAttribute("dname").toString();
+	//ps1.setString(1,timing);
+	 
+	Statement statement = con.createStatement();
+	ResultSet result = statement.executeQuery(sql1);
+	 
+	int count = 0;
+	 int fullname=0;
+	while (result.next()){
+		if(count<=1){
+	    fullname = result.getInt("counter");
+	    //out.println(fullname);
+	    count++;
+		}
+	}
+	
+	//String sql1="select counter from Doctors where timing=?";
+	//ps1 = con.prepareStatement(sql1);
+	
+	//String j = ps1.executeQuery();
+	//out.println(j);
+	
+	String sql="update Doctors set counter='"+(fullname+1)+"' where timing=?";
+	ps = con.prepareStatement(sql);
+	
+	ps.setString(1,timing);
 	int i = ps.executeUpdate();
 	}
 	catch(SQLException sql)
@@ -174,8 +234,186 @@ body{
 	request.setAttribute("error", sql);
 	out.println(sql);
 	}
-	*/
    %>
 </div>
+      </div>
+      </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">At Your Service</h2>
+            <hr class="my-4">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-diamond text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Superb Consultants</h3>
+              <p class="text-muted mb-0">These are the PRO SERVICE at our end to make you feel better</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Ready to Consult</h3>
+              <p class="text-muted mb-0">This is the best thing to transform your life!</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Up to Date</h3>
+              <p class="text-muted mb-0">We update services to keep things fresh.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-heart text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Made with Love</h3>
+              <p class="text-muted mb-0">You have to greet your thoughts with love these days!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <section class="p-0" id="portfolio">
+      <div class="container-fluid p-0">
+        <div class="row no-gutters popup-gallery">
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
+              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Category
+                  </div>
+                  <div class="project-name">
+                    Fitness
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
+              <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Category
+                  </div>
+                  <div class="project-name">
+                    Healthy Days                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
+              <img class="img-fluid" src="img/portfolio/thumbnails/3.jpg" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Category
+                  </div>
+                  <div class="project-name">
+                    Healthy Treatment
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
+              <img class="img-fluid" src="img/portfolio/thumbnails/4.jpg" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Category
+                  </div>
+                  <div class="project-name">
+                    Healthy Check-up
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
+              <img class="img-fluid" src="img/portfolio/thumbnails/5.jpg" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Category
+                  </div>
+                  <div class="project-name">
+                    Healthy Body
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
+              <img class="img-fluid" src="img/portfolio/thumbnails/6.jpg" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Category
+                  </div>
+                  <div class="project-name">
+                    Healthy Mind
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading">Let's Get In Touch!</h2>
+            <hr class="my-4">
+            <p class="mb-5">Ready to consult with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 ml-auto text-center">
+            <i class="fa fa-phone fa-3x mb-3 sr-contact"></i>
+            <p></p>
+          </div>
+          <div class="col-lg-4 mr-auto text-center">
+            <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+            <p>
+              <a href="mailto:your-b214005@iiit-bh.ac.in">b214005@iiit-bh.ac.in</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <p align="center">Developed and designed by-> <strong>Abhishek Kumar Mandal</strong></p>
+    </section>
+  <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
 </body>
 </html>

@@ -10,9 +10,7 @@
 <script src="https://oss.maxcdn.com/html5.shiv/3.7.2/html5.shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <style type="text/css">
-body{
-	padding-top: 50px;
-}
+
 
 .starter-template{
 	padding: 40px 15px;

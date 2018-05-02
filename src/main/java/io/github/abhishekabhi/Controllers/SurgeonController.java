@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SurgeonController {
 
-	@RequestMapping("/surgeon")
+	@RequestMapping("/details")
 	public String surgeonPage() {
-		return "surgeon";
+		return "details";
 	}
 }
