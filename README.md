@@ -1,7 +1,7 @@
 # Fixing-Doctors-Appointment-System
 This is the complete Web-Application.
 
-<strong>Developed By</strong>:  <b><h2>Abhishek Kumar Mandal</h2></b>
+<strong>Developed By</strong>:  <a href="https://abhishek-abhi.github.io/"><strong>Abhishek Kumar Mandal</strong></a>
 
 
 <strong>Description</strong> :
